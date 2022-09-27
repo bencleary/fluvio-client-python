@@ -47,6 +47,14 @@ class Offset:
         self._inner = inner
 
 
+class ConsumerConfiguration:
+    """
+    An interface for interacting with the ConsumerConfiguration struct from the
+    Rust API.
+    """
+    ...
+
+
 class PartitionConsumerStream:
     """An iterator for `PartitionConsumer.stream` method where each `__next__`
     returns a `Record`.
