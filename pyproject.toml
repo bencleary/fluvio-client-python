@@ -1,2 +1,7 @@
 [build-system]
 requires = ["setuptools", "wheel", "setuptools-rust"]
+
+[tool.isort]
+profile = "black"
+src_paths = ["fluvio", "tests"]
+honor_noqa = true

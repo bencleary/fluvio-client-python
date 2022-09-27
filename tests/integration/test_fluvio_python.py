@@ -49,7 +49,7 @@ class TestFluvioMethods(unittest.TestCase):
         """
 
         wasm_module_path = os.path.abspath(
-            "integration-tests/smartmodule_filter_on_a.wasm"
+            "tests/resources/smartmodule_filter_on_a.wasm"
         )
 
         fluvio = Fluvio.connect()
