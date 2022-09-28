@@ -1,5 +1,6 @@
 from string import ascii_lowercase
-from fluvio import Fluvio, FluviorError, Offset
+from fluvio import Fluvio, FluviorError
+from fluvio.consumer import Offset
 import unittest
 import uuid
 import os
@@ -48,9 +49,7 @@ class TestFluvioMethods(unittest.TestCase):
 
         """
 
-        wasm_module_path = os.path.abspath(
-            "tests/resources/smartmodule_filter_on_a.wasm"
-        )
+        wasm_module_path = os.path.abspath("tests/resources/smartmodule_filter_on_a.wasm")
 
         fluvio = Fluvio.connect()
         producer = fluvio.topic_producer(self.topic)
@@ -61,9 +60,7 @@ class TestFluvioMethods(unittest.TestCase):
         consumer = fluvio.partition_consumer(self.topic, 0)
         records.append(
             bytearray(
-                next(
-                    consumer.stream_with_config(Offset.beginning(), wasm_module_path)
-                ).value()
+                next(consumer.stream_with_config(Offset.beginning(), wasm_module_path)).value()
             ).decode()
         )
         self.assertEqual(len(records), 1)
@@ -143,9 +140,7 @@ class TestFluvioErrors(unittest.TestCase):
             print("ERROR: %s" % e)
 
         self.assertTrue(error is not None)
-        self.assertEqual(
-            error.args, ("Topic not found: %s" % self.topic,)  # noqa: E501
-        )
+        self.assertEqual(error.args, ("Topic not found: %s" % self.topic,))  # noqa: E501
 
 
 class TestFluvioProduceFlush(unittest.TestCase):

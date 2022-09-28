@@ -26,6 +26,9 @@ install-wheel: build-wheel
 build-dev: venv-pip
 	$(PYTHON) setup.py develop
 
+unit-tests: build-dev
+	$(PWD)/venv/bin/pytest tests/unit
+
 integration-tests: build-dev
 	$(PYTHON) setup.py test
 

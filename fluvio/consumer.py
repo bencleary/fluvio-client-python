@@ -7,6 +7,7 @@ from ._fluvio_python import (  # noqa: F401
     PartitionConsumerStream as _PartitionConsumerStream,
 )
 from .record import Record
+from .smart_module import SmartModule, SmartModuleKind
 
 
 class Offset:
@@ -52,7 +53,25 @@ class ConsumerConfiguration:
     An interface for interacting with the ConsumerConfiguration struct from the
     Rust API.
     """
-    ...
+
+    smart_module: SmartModule
+    max_bytes: int
+    isolation: typing.Literal["ReadUncommitted", "ReadCommitted"]
+    disable_continous: bool
+
+    def __init__(
+        self,
+        smart_module: SmartModule,
+        max_bytes: int,
+        isolation: typing.Literal["ReadUncommitted", "ReadCommitted"],
+        disable_continous: bool,
+        *args,
+        **kwargs
+    ):
+        self.smart_module = smart_module
+        self.max_bytes = max_bytes
+        self.isolation = isolation
+        self.disable_continous = disable_continous
 
 
 class PartitionConsumerStream:
